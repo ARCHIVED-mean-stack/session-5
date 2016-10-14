@@ -1,0 +1,19 @@
+
+@import "imports/variables";
+@import "imports/basics";
+@import "imports/nav";
+
+.hidden {
+  /*display: none;*/
+}
+
+.options {
+  text-align: center;
+  padding: 2rem 0;
+  select {
+    margin-right: 2rem;
+  }
+}
+
+
+
