@@ -1,0 +1,68 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+body {
+	font-size: 100%;
+	line-height: 1.5;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+img {
+	width: 100%;
+	border: 4px solid #bbb;
+}
+.active img {
+	border-color: #666;
+}
+#imageGallery {
+	list-style: none;
+	display: flex;
+
+	li {
+		flex: 1 1 auto;
+	}
+}
+
+#content {
+	position: relative;
+
+	img {
+		border: none;
+	}
+	p {
+		position: absolute;
+		bottom: 1rem;
+		color: white;
+		padding: 1rem;
+		background-color: rgba(0,0,0,0.5);
+		width: 100%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
