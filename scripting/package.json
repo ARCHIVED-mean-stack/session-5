@@ -2,13 +2,19 @@
   "name": "pictureviewer",
   "version": "1.0.0",
   "description": "",
-  "main": "app/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app/app.js"
+    "start": "node app.js"
   },
   "author": "Daniel Deverell",
   "license": "MIT",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.16.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0"
   }
 }
