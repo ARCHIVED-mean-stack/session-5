@@ -183,14 +183,16 @@ app.controller("HeaderController", function ($scope) {
 
 See `other/simple-module`
 
-Save `app.module.js` into a newly created gallery folder and link it into the main html file:
+Save `app.module.js` into a newly created public/gallery folder and link it into the main html file:
 
 ```js
 // Define the module
 angular.module('galleryApp', []);
 ```
 
-Save the existing scripts file into the gallery folder as `gallery-list.component.js`, edit the html to point to it and delete the js folder.
+Save the existing scripts file into the gallery folder as `gallery-list.component.js`, edit the html to point to it and (optionally) delete the js folder.
+
+In the component js file:
 
 ```js
 angular.module('galleryApp').component('imgList', {
@@ -269,6 +271,7 @@ angular.module('galleryApp').component('imgList', {
     }
 });
 ```
+In index.html:
 
 ```html
 <div data-ng-app="galleryApp">
