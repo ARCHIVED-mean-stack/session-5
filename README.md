@@ -169,6 +169,8 @@ app.controller("HeaderController", function ($scope) {
 ```
 ###Creating a Module
 
+See `other/simple-module`
+
 Save `app.module.js` into a newly created gallery folder and link it into the main html file:
 
 ```js
@@ -253,6 +255,12 @@ Save the existing scripts file into the gallery folder as `gallery-list.componen
         };
     }
 });
+```
+
+```
+<div data-ng-app="galleryApp">
+    <img-list></img-list>
+</div>
 ```
 
 
