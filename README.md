@@ -169,16 +169,6 @@ Key / Value pairs:
 ```
 
 
-###Back to the Gallery
-
-Add `$scope.galleryHeader = "Image Gallery";` to the controller
-```
-app.controller("HeaderController", function ($scope) {
-    $scope.galleryHeader = "Image Galleries";
-});
-```
-
-
 ###Creating a Module
 
 See `other/simple-module`
@@ -207,10 +197,6 @@ angular.module('galleryApp').component('imgList', {
     <div id="content">
         <img id="placeholder" src="img/placeholder.gif" alt="Placeholder">
     <p id="description">Select an image.</p>`,
-
-    // controller: function HeaderController() {
-    //     this.galleryHeader = "Image Galleries";
-    // },
 
     controller: function ListController() {
         this.entries = [
