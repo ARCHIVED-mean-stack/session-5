@@ -266,15 +266,217 @@ angular.module('galleryApp').component('imgList', {
 
 ##Sushi
 
+Note the addition of a new home page - `index.html` and the addition of images to the `img` directory.
 
+* Download [Visual Studio Code](http://code.visualstudio.com)
+* Edit the user preferences to `"editor.formatOnType": true,` and `"editor.formatOnSave": true`
+* Note the built-in support for Angular
 
+Run `sudo npm install`, run `gulp` and test by adding a selected state for the new home page to the sass.
 
+Add `<script src="https://code.angularjs.org/1.5.8/angular.js"></script>`. 
 
+###Controllers
 
-##NODE
+Git init
 
+```html
+<article ng-app="recipeApp" ng-controller="RecipeListController">
+    <ul>
+        <li ng-repeat="recipe in recipes">
+            <span>{{recipe.title}}</span>
+            <p>{{recipe.description}}</p>
+        </li>
+    </ul>
+</article>
+```
 
+```js
+// Define the `recipeApp` module
+var recipeApp = angular.module('recipeApp', []);
 
+// Define the `RecipeListController` controller on the `recipeApp` module
+recipeApp.controller('RecipeListController', function RecipeListController($scope) {
+    $scope.recipes = [
+        {
+            name: 'recipe1309',
+            title: 'Lasagna',
+            date: '2013-09-01',
+            description: 'Lasagna noodles piled high and layered full of three kinds of cheese to go along with the perfect blend of meaty and zesty, tomato pasta sauce all loaded with herbs.',
+            image: 'lasagne.png'
+        },
+
+        {
+            name: 'recipe1404',
+            title: 'Pho-Chicken Noodle Soup',
+            date: '2014-04-15',
+            description: 'Pho (pronounced "fuh") is the most popular food in Vietnam, often eaten for breakfast, lunch and dinner. It is made from a special broth that simmers for several hours infused with exotic spices and served over rice noodles with fresh herbs.',
+            image: 'pho.png'
+        },
+
+        {
+            name: 'recipe1210',
+            title: 'Guacamole',
+            date: '2012-10-01',
+            description: 'Guacamole is definitely a staple of Mexican cuisine. Even though Guacamole is pretty simple, it can be tough to get the perfect flavor - with this authentic Mexican guacamole recipe, though, you will be an expert in no time.',
+            image: 'guacamole.png'
+        },
+
+        {
+            name: 'recipe1810',
+            title: 'Hamburger',
+            date: '2012-10-20',
+            description: 'A Hamburger (often called a burger) is a type of food in the form of a rounded bun sliced in half with its center filled with patty which is usually meat. Possible toppings include  lettuce, tomatoes and onions.',
+            image: 'hamburger.png'
+        }
+    ];
+});
+```
+
+###Components
+
+Components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs.
+
+Git stash, git branch, git checkout (remove the refrences to the files above in index.html)
+
+Create `app-module.js` in the app directory and link to it in `index.html`:
+
+```
+'use strict';
+
+angular.module('recipeApp', []);
+```
+
+[Article on use strict](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/)
+
+This defines the `recipeApp` [module](https://docs.angularjs.org/guide/module) which depends on the `recipeList` module.
+
+Create `recipe-list.component.js` and save it to the js directory and link it to index.html:
+```
+'use strict';
+
+angular.module('recipeApp').component('recipeList', {
+    template:
+    `<h1>test</h1>`
+});
+```
+
+And add the component to the page:
+```html
+<div ng-app="recipeApp">
+    <recipe-list></recipe-list>
+</div>
+```
+
+Add the controller to the component:
+```js
+angular.module('recipeApp').component('recipeList', {
+    template:
+    `<h1>test</h1>`,
+    controller: function RecipeListController() {
+
+    }
+});
+```
+Add the data to the controller:
+```js
+angular.module('recipeApp').component('recipeList', {
+    template:
+    `<h1>test</h1>`,
+controller: function RecipeListController() {
+    this.recipes = [
+        {
+            name: 'recipe1309',
+            title: 'Lasagna',
+            date: '2013-09-01',
+            description: 'Lasagna noodles piled high and layered full of three kinds of cheese to go along with the perfect blend of meaty and zesty, tomato pasta sauce all loaded with herbs.',
+            image: 'lasagne.png'
+        },
+        {
+            name: 'recipe1404',
+            title: 'Pho-Chicken Noodle Soup',
+            date: '2014-04-15',
+            description: 'Pho (pronounced “fuh”) is the most popular food in Vietnam, often eaten for breakfast, lunch and dinner. It is made from a special broth that simmers for several hours infused with exotic spices and served over rice noodles with fresh herbs.',
+            image: 'pho.png'
+        },
+        {
+            name: 'recipe1210',
+            title: 'Guacamole',
+            date: '2012-10-01',
+            description: 'Guacamole is definitely a staple of Mexican cuisine. Even though Guacamole is pretty simple, it can be tough to get the perfect flavor – with this authentic Mexican guacamole recipe, though, you will be an expert in no time.',
+            image: 'guacamole.png'
+        },
+        {
+            name: 'recipe1810',
+            title: 'Hamburger',
+            date: '2012-10-20',
+            description: 'A Hamburger (or often called as burger) is a type of food in the form of a rounded bread sliced in half and its Center is filled with patty which is usually taken from the meat, then the vegetables be lettuce, tomatoes and onions.',
+            image: 'hamburger.png'
+        }
+    ];
+}
+});
+
+```
+
+Create the template. Note the use of back-ticks.
+
+```html
+template:
+`
+<ul>
+    <li ng-repeat="recipe in $ctrl.recipes">
+        <img ng-src="img/home/{{ recipe.image }}">
+        <h1><a href="#0">{{ recipe.title }}</a></h1>
+        <p>{{ recipe.description }}</p>
+    </li>
+</ul>
+`,
+```
+Make it an external file:
+```js
+templateUrl: 'js/recipe-template.html',
+```
+
+Note - this link it relative to index.html
+
+###Styling the Recipes
+
+* create a new `_recipes.scss` file
+* add it to the imports in `styles.scss
+* add a class to the ul `<ul class="recipes-list">`
+```css
+.p-recipes article {
+    margin-left: 1rem;
+}
+.recipes-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    // flex-direction: row;
+    margin-left: -10px;
+    margin-top: -10px;
+
+    li {
+        flex: 1 0 100%;
+        box-sizing: border-box;
+        background: #e0ddd5;
+        color: #171e42;
+        padding: 10px;
+        margin-left: 10px;
+        margin-top: 10px;
+        @media (min-width: $break-one) {
+        flex: 1 0 calc(50% - 10px);
+        }
+    }
+    img {
+        width: 30%;
+        float: left;
+        margin-right: 1.5rem;
+        margin-left: 1rem;
+    }
+}
+```
 
 
 ##Homework

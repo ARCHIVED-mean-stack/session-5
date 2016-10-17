@@ -15,7 +15,6 @@ var htmlSource = 'app/**/*.html';
 
 
 gulp.task('sass', function(){
-	// console.log('testing 1 2 3')
 	return gulp.src(sassSources)
 	.pipe(sourcemaps.init())
 	.pipe(sass(sassOptions).on('error', sass.logError))
@@ -27,7 +26,8 @@ gulp.task('sass', function(){
 gulp.task('serve', ['sass'], function(){
 
 	browserSync.init({
-		server: './app'
+		server: './app',
+		browser: "google chrome"
 	})
 
 	gulp.watch(sassSources, ['sass'])
