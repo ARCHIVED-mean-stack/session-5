@@ -6,7 +6,9 @@
 
 `$ node app.js`
 
-Examine scripts.js and note the use of function ListController and $scope
+Examine scripts.js and note the use of function ListController and $scope. 
+
+Ensure that Gulp is processing the scss files.
 
 Add a link to angular js:
 
@@ -26,7 +28,7 @@ Angular uses this to extend html with directives (data-ng-app, data-ng-controlle
 <head>
   <title>Image Gallery</title>
 <script src="https://code.angularjs.org/1.2.3/angular.js"></script>
-<script src="js/alt.js" charset="utf-8"></script>
+<script src="js/scripts.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -53,7 +55,7 @@ AngularJS expressions are written inside double braces: `{{ expression }}`, e.g.
 
 While the ng-app directive defines the application, the ng-controller directive defines the controller for that application.
 
-Naming the app:
+Declaring the app:
 
 ```html
 <body data-ng-app="galleryApp">
@@ -76,7 +78,7 @@ The module is a
 ```js
 var app = angular.module('galleryApp', []);
 
-galleryApp.controller("ListController", function( $scope ) {
+app.controller("ListController", function( $scope ) {
   ...
 });
 ```
@@ -90,23 +92,29 @@ Now we can update to the last stable version of angular 1.x:
 
 Use the thumbnails:
 ```html
-<a href="img/{{entry.picture[1]}}" title="{{entry.title}}"><img ng-src="img/{{ entry.picture[0] }}"></a>
+<a href="img/{{entry.picture[1]}}" title="{{entry.title}}">
+    <img src="img/{{ entry.picture[0] }}">
+</a>
 ```
 ```js
 "picture": ["pagoda-tn.jpg","pagoda.jpg"]
-...
 "picture": ["bridge-tn.jpg","bridge.jpg"]
 ...
 ```
 Use the directive `ng-src` to [prevent the error](https://docs.angularjs.org/api/ng/directive/ngSrc).
 
-###More on Directives
+
+
+###Directives and Filters
 
 Use a simple directive on the `<h1>`: `<h1>{{'Image' + ' ' + 'Gallery'}}</h1>` first
 
 Add
 ```
-<p><input ng-model="messageText" size="30" /> Everybody shout "{{ messageText | uppercase }}"</p>
+<p>
+    <input ng-model="messageText" size="30" /> 
+    Everybody shout "{{ messageText | uppercase }}"
+</p>
 ```
 Note the [filter](https://docs.angularjs.org/api/ng/filter). 
 
@@ -159,6 +167,8 @@ Key / Value pairs:
     </li>
 </ul>
 ```
+
+
 ###Back to the Gallery
 
 Add `$scope.galleryHeader = "Image Gallery";` to the controller
@@ -167,6 +177,8 @@ app.controller("HeaderController", function ($scope) {
     $scope.galleryHeader = "Image Galleries";
 });
 ```
+
+
 ###Creating a Module
 
 See `other/simple-module`
