@@ -270,7 +270,9 @@ Note the addition of a new home page - `index.html` and the addition of images t
 
 * Download [Visual Studio Code](http://code.visualstudio.com)
 * Edit the user preferences to `"editor.formatOnType": true,` and `"editor.formatOnSave": true`
-* Note the built-in support for Angular
+* Note the built-in support for Angular and Git
+
+Create a Git and Github repo for this project so we can use the built-in support in Code.
 
 Run `sudo npm install`, run `gulp` and test by adding a selected state for the new home page to the sass.
 
@@ -481,14 +483,14 @@ Note - this link it relative to index.html
 
 ##Homework
 
-1. add gulp-sftp to your homework package.json file, edit your gulpfile and publish your homework to a server. Note: a final rendering of this ongoing project will consistute your midterm project and must be available both as a website on a server for viewing and a github repo. The midterm projects are due on the seventh class and must be an up to date showcase of the techniques discussed in class up to that point.
+1. Attempt the Angular [PhoneCat](https://docs.angularjs.org/tutorial/) tutorial up to part 8. Note - you may need to install Bower in order for it to work. 
 
 
 ##Reading
 
-Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS and Node.js, chapter 3. Please attempt to implement his sample app on your computer. Here's his [Github repo with sample code](https://github.com/dickeyxxx/mean-sample). Be sure to look at the branches (they correspond to chapter numbers) and don't forget to run `sudo npm install` when running the sample code.
+Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS and Node.js, chapter 4. Please attempt to implement his sample app on your computer. Here's his [Github repo with sample code](https://github.com/dickeyxxx/mean-sample). Be sure to look at the branches (they correspond to chapter numbers) and don't forget to run `sudo npm install` when running the sample code.
 
-[Mozilla on DOM Scripting](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+
 
 NOTES
 
