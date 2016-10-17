@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
+var sftp = require('gulp-sftp');
 
 var sassOptions = {
 	errLogToConsole: true,
@@ -31,6 +32,16 @@ gulp.task('serve', ['sass'], function(){
 
 	gulp.watch(sassSources, ['sass'])
 	gulp.watch(htmlSource).on('change', browserSync.reload);
+});
+
+gulp.task('deploy', function(){
+	return gulp.src('./app/**/*')
+	.pipe(sftp({
+		host: 'oit2.scps.nyu.edu',
+		user: '****',
+		pass: '****',
+		remotePath: '/home/p/pezuaj/web/'
+	}));
 });
 
 

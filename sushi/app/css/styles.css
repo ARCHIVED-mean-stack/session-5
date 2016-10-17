@@ -145,10 +145,13 @@ img {
   justify-content: center;
 }
 
+.main-nav li {
+  flex: 1 1 auto;
+}
+
 .main-nav a {
-  padding: 1.25rem 0.5rem;
+  padding: .5rem 0.25rem;
   font-size: 1rem;
-  max-width: 140px;
   font-weight: bold;
   display: flex;
   align-items: flex-start;
@@ -169,48 +172,44 @@ img {
   color: #fff;
 }
 
+@media (min-width: 46.25rem) {
+  .main-nav a {
+    font-size: 1.5rem;
+    padding: 1.25rem 0.5rem;
+  }
+}
+
 .main-nav span {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: normal;
-  color: #888;
-  margin: 0.25rem 0 0 0;
-}
-
-.main-nav .icon {
-  width: 40px;
-  height: 40px;
-  float: left;
-  margin-right: 1rem;
-  fill: #999;
-}
-
-.main-nav.outlines * {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
+  display: none;
 }
 
 @media (min-width: 46.25rem) {
-  .main-nav a {
-    max-width: 500px;
-    font-size: 1.5rem;
+  .main-nav span {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: #888;
+    margin: 0.25rem 0 0 0;
   }
+}
+
+.main-nav .icon {
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-right: 0.5rem;
+  fill: #999;
+}
+
+@media (min-width: 46.25rem) {
   .main-nav .icon {
     width: 25px;
     height: 25px;
   }
 }
 
-.hidden {
-  /*display: none;*/
-}
-
-.options {
-  text-align: center;
-  padding: 2rem 0;
-}
-
-.options select {
-  margin-right: 2rem;
+.main-nav.outlines * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -180,7 +180,7 @@ angular.module('galleryApp', []);
 
 Save the existing scripts file into the gallery folder as `gallery-list.component.js`, edit the html to point to it and delete the js folder.
 
-```
+```js
 angular.module('galleryApp').component('imgList', {
     template:
     `<ul id="imageGallery">
@@ -258,7 +258,7 @@ angular.module('galleryApp').component('imgList', {
 });
 ```
 
-```
+```html
 <div data-ng-app="galleryApp">
     <img-list></img-list>
 </div>
