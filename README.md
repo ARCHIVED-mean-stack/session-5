@@ -58,7 +58,7 @@ Naming the app:
 ```html
 <body data-ng-app="galleryApp">
 ```
-Note that is no longer works. We need to register the controller with the app:
+Note that the app no longer works. We need to register the controller with the app:
 
 ```js
 var app = angular.module('galleryApp', []);
@@ -180,7 +180,8 @@ angular.module('galleryApp', []);
 
 Save the existing scripts file into the gallery folder as `gallery-list.component.js`, edit the html to point to it and delete the js folder.
 
-```angular.module('galleryApp').component('imgList', {
+```
+angular.module('galleryApp').component('imgList', {
     template:
     `<ul id="imageGallery">
         <li data-ng-repeat="entry in $ctrl.entries">
@@ -263,9 +264,9 @@ Save the existing scripts file into the gallery folder as `gallery-list.componen
 </div>
 ```
 
+##Sushi
 
 
-##Sushi 
 
 
 
