@@ -116,37 +116,27 @@ Add
     Everybody shout "{{ messageText | uppercase }}"
 </p>
 ```
-Note the [filter](https://docs.angularjs.org/api/ng/filter). 
-
-Try:
-```
-ng-init="portfolios = ['Call of Booty', 'The Sack of the Innocents', 'Pipe and First Mate']"
-```
+Note the [filter](https://docs.angularjs.org/api/ng/filter).
 
 ```
 <ul>
-  <li ng-repeat="portfolio in portfolios">  
-    {{ portfolio }}
+  <li ng-repeat="entry in entries">  
+    {{ entry.title }}
   </li>
 </ul>
 ```
 
 Expand on the init:
 ```
-ng-init="portfolios = [ 
-{ name: 'Call of Booty', date: '2013-09-01' },
-{ name: 'The Sack of the Innocents', date: '2014-04-15' },
-{ name: 'Pipe and First Mate', date: '2012-10-01' } ]"
-
 <p>Filter list: <input ng-model="searchFor" size="30" /></p>
 
 <ul>
-    <li ng-repeat="portfolio in portfolios | filter:searchFor | orderBy:'date' ">
-        {{ portfolio.name }}
+    <li ng-repeat="entry in entries | filter:searchFor | orderBy:'title' ">
+        {{ entry.title }}
     </li>
 </ul>
 
-<p> There are {{ portfolios.length }} portfolios available to view.</p>
+<p> There are {{ entries.length }} entries available to view.</p>
 
 ```
 Add [ngClass](https://docs.angularjs.org/api/ng/directive/ngClass) (see also [ngClassEven/Odd](https://docs.angularjs.org/api/ng/directive/ngClassEven)):
@@ -158,9 +148,9 @@ Add [ngClass](https://docs.angularjs.org/api/ng/directive/ngClass) (see also [ng
 Key / Value pairs:
 ```
 <ul>
-    <li ng-repeat="portfolio in portfolios">
+    <li ng-repeat="entry in entries">
         <ul>
-            <li ng-repeat="(key, value) in portfolio">
+            <li ng-repeat="(key, value) in entry">
                 <strong>{{key}}</strong> - {{value}}
             </li>
         </ul>
