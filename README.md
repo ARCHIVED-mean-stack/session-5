@@ -275,13 +275,13 @@ Note the addition of a new home page - `index.html` and the addition of images t
 
 Create a Git and Github repo for this project so we can use the built-in support in Code.
 
-Run `sudo npm install`, run `gulp` and test by adding a selected state for the new home page to the sass.
+Run `sudo npm install`, run `gulp` and test by adding a selected state for the new home page to the sass (the class name for the page is `p-home`).
 
 Add `<script src="https://code.angularjs.org/1.5.8/angular.js"></script>`. 
 
 ###Controllers
 
-Git init
+Git branch controllers
 
 ```html
 <article ng-app="recipeApp" ng-controller="RecipeListController">
@@ -294,8 +294,10 @@ Git init
 </article>
 ```
 
+Define the `recipeApp` module in a new `recipes` folder:
+
 ```js
-// Define the `recipeApp` module
+
 var recipeApp = angular.module('recipeApp', []);
 
 // Define the `RecipeListController` controller on the `recipeApp` module
@@ -332,7 +334,7 @@ recipeApp.controller('RecipeListController', function RecipeListController($scop
             description: 'A Hamburger (often called a burger) is a type of food in the form of a rounded bun sliced in half with its center filled with patty which is usually meat. Possible toppings include  lettuce, tomatoes and onions.',
             image: 'hamburger.png'
         }
-    ];
+    ]
 });
 ```
 
@@ -354,7 +356,7 @@ angular.module('recipeApp', []);
 
 This defines the `recipeApp` [module](https://docs.angularjs.org/guide/module) which depends on the `recipeList` module.
 
-Create `recipe-list.component.js` and save it to the js directory and link it to index.html:
+Create `recipe-list.component.js` and save it to the recipes directory and link it to index.html:
 ```
 'use strict';
 
@@ -384,9 +386,9 @@ angular.module('recipeApp').component('recipeList', {
 Add the data to the controller:
 ```js
 angular.module('recipeApp').component('recipeList', {
-    template:
+  template:
     `<h1>test</h1>`,
-controller: function RecipeListController() {
+  controller: function RecipeListController() {
     this.recipes = [
         {
             name: 'recipe1309',
@@ -480,6 +482,61 @@ Note - this link it relative to index.html
     }
 }
 ```
+
+###Breakout
+
+```html
+<script src="app-module.js"></script>
+<script src="recipes/recipe-list.module.js"></script>
+<script src="recipes/recipe-list.component.js"></script>
+```
+* app-module
+```
+'use strict';
+
+angular.module('recipeApp', [
+    'recipeList'
+]);
+```
+* recipe-list.module
+```
+'use strict';
+
+angular.module('recipeList', []);
+```
+* recipe-list.component
+```
+'use strict';
+        
+angular.module('recipeApp').component('recipeList', {
+```
+
+###Search / Sort Filter
+
+```
+<p>
+  Search: <input ng-model="$ctrl.query" />
+</p>
+```
+
+`<li ng-repeat="recipe in $ctrl.recipes | filter:$ctrl.query">`
+
+```
+<p>
+  Sort by:
+  <select ng-model="$ctrl.orderProp">
+    <option value="title">Alphabetical</option>
+    <option value="date">Newest</option>
+  </select>
+</p>
+```
+
+`<li ng-repeat="recipe in $ctrl.recipes | filter:$ctrl.query | orderBy:$ctrl.orderProp"">`
+
+Add to bottom of recipe-list.component.js
+
+`this.orderProp = 'date';`
+
 
 
 ##Homework
