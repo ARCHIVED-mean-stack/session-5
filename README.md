@@ -537,6 +537,37 @@ Add to bottom of recipe-list.component.js
 
 `this.orderProp = 'date';`
 
+###Fetching the Data
+
+Use recipes.json
+
+```
+angular.module('recipeApp').component('recipeList', {
+    templateUrl: 'recipes/recipe-template.html',
+
+    controller: function RecipeListController($http) {
+        var self = this;
+        self.orderProp = 'date';
+
+        $http.get('recipes/recipes.json').then(function (response) {
+            self.recipes = response.data;
+        });
+    }
+  });
+  ```
+
+  ###Preparing for Routing
+
+  `<h1><a href="#recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>`
+
+  Add ngRoute
+
+  `<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>`
+
+  Add config (after app.module)
+
+  `<script src="app.config.js"></script>`
+
 
 
 ##Homework
