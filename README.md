@@ -284,57 +284,6 @@ on `git branch module`
 </article>
 ```
 
-Define the `recipeApp` module in a new `recipes` folder as `recipe-list.module.js` and link to it from index.html:
-
-```js
-var recipeApp = angular.module('recipeApp', []);
-```
-Define the `RecipeListController` controller on the `recipeApp` module:
-
-```js
-recipeApp.controller('RecipeListController', function RecipeListController($scope) {
-
-});
-```
-
-Get the data from `recipes.not.json` in the data directory:
-
-```js
-    $scope.recipes = [
-        {
-            name: 'recipe1309',
-            title: 'Lasagna',
-            date: '2013-09-01',
-            description: 'Lasagna noodles piled high and layered full of three kinds of cheese to go along with the perfect blend of meaty and zesty, tomato pasta sauce all loaded with herbs.',
-            image: 'lasagne.png'
-        },
-
-        {
-            name: 'recipe1404',
-            title: 'Pho-Chicken Noodle Soup',
-            date: '2014-04-15',
-            description: 'Pho (pronounced "fuh") is the most popular food in Vietnam, often eaten for breakfast, lunch and dinner. It is made from a special broth that simmers for several hours infused with exotic spices and served over rice noodles with fresh herbs.',
-            image: 'pho.png'
-        },
-
-        {
-            name: 'recipe1210',
-            title: 'Guacamole',
-            date: '2012-10-01',
-            description: 'Guacamole is definitely a staple of Mexican cuisine. Even though Guacamole is pretty simple, it can be tough to get the perfect flavor - with this authentic Mexican guacamole recipe, though, you will be an expert in no time.',
-            image: 'guacamole.png'
-        },
-
-        {
-            name: 'recipe1810',
-            title: 'Hamburger',
-            date: '2012-10-20',
-            description: 'A Hamburger (often called a burger) is a type of food in the form of a rounded bun sliced in half with its center filled with patty which is usually meat. Possible toppings include  lettuce, tomatoes and onions.',
-            image: 'hamburger.png'
-        }
-    ]
-```
-
 ###Componentize
 
 Remember - components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs.
@@ -353,7 +302,7 @@ angular.module('recipeApp', []);
 
 This defines the `recipeApp` [module](https://docs.angularjs.org/guide/module).
 
-Create `recipe-list.component.js` in the recipes directory and link it to index.html (remove the previously use recipe-list.module.js):
+Create `recipe-list.component.js` in the recipes directory and link it to index.html:
 ```
 'use strict';
 
@@ -473,6 +422,10 @@ Note - this link it relative to index.html
         }
     }
 }
+
+a {
+    color: $reddish;
+}
 ```
 
 ###Breakout
@@ -534,7 +487,7 @@ Add to the controller in `recipe-list.component.js` after the recipes array:
 
 ###Fetching the Data
 
-Use recipes.json
+Use recipes.json in `recipe-list.component.js`. Since we are making the assignment of the recipes property in a callback function, where the this value is not defined, we also introduce a local variable called self that points back to the controller instance.
 
 ```
 angular.module('recipeApp').component('recipeList', {
@@ -553,17 +506,19 @@ angular.module('recipeApp').component('recipeList', {
 
   ###Preparing for Routing
 
+  In the html template:
+
   `<h1><a href="#recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>`
 
   Add ngRoute to index.html after the main angular load:
 
   `<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>`
 
-  Add link to `app.config.js` (after app.module)
+  Add link to `app.config.js` (after app.module):
 
   `<script src="app.config.js"></script>`
 
-  We need to add `ngRoute` as a dependency for our module:
+  We need to add `ngRoute` as a dependency for our app-module.js:
   ```
     'use strict';
 
@@ -573,7 +528,7 @@ angular.module('recipeApp').component('recipeList', {
 ]);
 ```
 
-Edit the config file:
+Create the app.config file in the app folder:
 ```js
 angular.
     module('recipeApp').
@@ -596,23 +551,9 @@ Edit index.html:
 </article>
 ```
 
+###Routing
 
-
-##Homework
-
-1. Add a home page with an Angular module to the previous week's homework.
-
-1. Attempt the Angular [PhoneCat](https://docs.angularjs.org/tutorial/) tutorial up to part 8. Note - you may need to install [Bower](https://bower.io) in order for it to work. I had to, and also has to use `sudo bower install --allow-root` in order to permit it to install dependencies.
-
-
-##Reading
-
-Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS and Node.js, chapter 4. Please attempt to implement his sample app on your computer. Here's his [Github repo with sample code](https://github.com/dickeyxxx/mean-sample). Be sure to look at the branches (they correspond to chapter numbers) and don't forget to run `sudo npm install` when running the sample code.
-
-
-
-NOTES
-
+Add ngRoute as a dependency to our application:
 ```
 'use strict';
 
@@ -622,6 +563,7 @@ angular.module('recipeApp', [
     'recipeList'
 ]);
 ```
+
 
 ```
 angular.
@@ -641,6 +583,37 @@ angular.
     ]);
 ```
 
+Alter the recipe-template to include the bang:
+```
+<h1><a href="#!recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>
+```
+
+```
+Create stubs for recipe details in a new recipe-detail directory:
+
+recipe-detail.module.js
+```
+angular.module('recipeDetail', [
+    'ngRoute'
+]);
+```
+
+recipe-detail.component.js
+```
+angular.
+    module('recipeDetail').
+    component('recipeDetail', {
+        template: '<p>Detail view for <span>{{$ctrl.recipeId}}</span></p>',
+        controller: ['$routeParams',
+            function RecipeDetailController($routeParams) {
+                this.recipeId = $routeParams.recipeId;
+            }
+        ]
+    });
+```
+
+Link to recipe-detail files:
+
 ```
 <head>
     <meta charset="UTF-8">
@@ -656,27 +629,26 @@ angular.
     <script src="recipe-detail/recipe-detail.component.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-```
-Recipe-detail.modle.js
-```
-angular.module('recipeDetail', [
-    'ngRoute'
-]);
-```
 
-recipe-detail.component.js
-```
-angular.
-    module('recipeDetail').
-    component('recipeDetail', {
-        template: 'Detail view for <span>{{$ctrl.recipeId}}</span>',
-        controller: ['$routeParams',
-            function RecipeDetailController($routeParams) {
-                this.recipeId = $routeParams.recipeId;
-            }
-        ]
-    });
-```
+
+
+
+
+##Homework
+
+1. Add a home page with an Angular module to the previous week's homework.
+
+
+##Reading
+
+Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS and Node.js, chapter 4. Please attempt to implement his sample app on your computer. Here's his [Github repo with sample code](https://github.com/dickeyxxx/mean-sample). Be sure to look at the branches (they correspond to chapter numbers) and don't forget to run `sudo npm install` when running the sample code.
+
+Attempt the Angular [PhoneCat](https://docs.angularjs.org/tutorial/) tutorial up to part 9. Note - you may need to install [Bower](https://bower.io) in order for it to work. I had to, and also has to use `sudo bower install --allow-root` in order to permit it to install dependencies.
+
+
+
+NOTES
+
 
 
 
