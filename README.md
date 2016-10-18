@@ -170,9 +170,9 @@ Save `app.module.js` into a newly created public/gallery folder and link it into
 angular.module('galleryApp', []);
 ```
 
-Save the existing scripts file into the gallery folder as `gallery-list.component.js`, edit the html to point to it and (optionally) delete the js folder.
+Save the existing scripts.js file into the gallery folder as `gallery-list.component.js`, edit index.html to point to it and (optionally) delete the js folder.
 
-In the component js file:
+In the component js file (note the back ticks in the template):
 
 ```js
 angular.module('galleryApp').component('imgList', {
@@ -370,7 +370,7 @@ angular.module('recipeApp').component('recipeList', {
 
 ```
 
-Create the template. Note the use of back-ticks.
+Create the template. Again - note the use of back ticks.
 
 ```html
 template:
