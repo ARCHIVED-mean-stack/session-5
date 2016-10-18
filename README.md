@@ -142,7 +142,7 @@ Expand on the init:
 Add [ngClass](https://docs.angularjs.org/api/ng/directive/ngClass) (see also [ngClassEven/Odd](https://docs.angularjs.org/api/ng/directive/ngClassEven)):
 
 ```
-<li ng-repeat="portfolio in portfolios | filter:searchFor | orderBy:'date' " 
+<li ng-repeat="portfolio in portfolios | filter:searchFor | orderBy:'title' " 
     ng-class="{ even: $even, odd: $odd }">
 ```
 Key / Value pairs:
@@ -161,7 +161,7 @@ Key / Value pairs:
 
 ###Creating a Module
 
-See `other/simple-module`
+See the sample files in `other/simple-module`
 
 Save `app.module.js` into a newly created public/gallery folder and link it into the main html file:
 
