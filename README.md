@@ -555,11 +555,11 @@ angular.module('recipeApp').component('recipeList', {
 
   `<h1><a href="#recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>`
 
-  Add ngRoute to indes.html after the main angular load:
+  Add ngRoute to index.html after the main angular load:
 
   `<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>`
 
-  Add config (after app.module)
+  Add link to `app.config.js` (after app.module)
 
   `<script src="app.config.js"></script>`
 
@@ -568,9 +568,32 @@ angular.module('recipeApp').component('recipeList', {
     'use strict';
 
     angular.module('recipeApp', [
-    'recipeList',
-    'ngRoute'
+    'ngRoute',
+    'recipeList'
 ]);
+```
+
+Edit the config file:
+```js
+angular.
+    module('recipeApp').
+    config(['$locationProvider', '$routeProvider',
+        function config($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('!');
+            $routeProvider.
+                when('/', {
+                    template: '<recipe-list></recipe-list>'
+                }).
+                otherwise('/recipes');
+        }
+    ]);
+```
+
+Edit index.html:
+```html
+<article ng-app="recipeApp">
+    <div ng-view></div>
+</article>
 ```
 
 
@@ -590,8 +613,70 @@ Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS an
 
 NOTES
 
-http://book.mixu.net/node/ch5.html
+```
+'use strict';
 
-https://github.com/scotch-io/react-tweets/issues/22
+angular.module('recipeApp', [
+    'ngRoute',
+    'recipeDetail',
+    'recipeList'
+]);
+```
+
+```
+angular.
+    module('recipeApp').
+    config(['$locationProvider', '$routeProvider',
+        function config($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('!');
+            $routeProvider.
+                when('/', {
+                    template: '<recipe-list></recipe-list>'
+                }).
+                when('/recipes/:recipeId', {
+                    template: '<recipe-detail></recipe-detail>'
+                }).
+                otherwise('/recipes');
+        }
+    ]);
+```
+
+```
+<head>
+    <meta charset="UTF-8">
+    <title>Brooklyn Eats: Matsu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+    <script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
+    <script src="app-module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="recipes/recipe-list.module.js"></script>
+    <script src="recipes/recipe-list.component.js"></script>
+    <script src="recipe-detail/recipe-detail.module.js"></script>
+    <script src="recipe-detail/recipe-detail.component.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+```
+Recipe-detail.modle.js
+```
+angular.module('recipeDetail', [
+    'ngRoute'
+]);
+```
+
+recipe-detail.component.js
+```
+angular.
+    module('recipeDetail').
+    component('recipeDetail', {
+        template: 'Detail view for <span>{{$ctrl.recipeId}}</span>',
+        controller: ['$routeParams',
+            function RecipeDetailController($routeParams) {
+                this.recipeId = $routeParams.recipeId;
+            }
+        ]
+    });
+```
+
 
 
