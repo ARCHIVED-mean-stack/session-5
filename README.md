@@ -284,14 +284,20 @@ Git branch controllers
 </article>
 ```
 
-Define the `recipeApp` module in a new `recipes` folder:
+Define the `recipeApp` module in a new `recipes` folder as `recipe-list.module.js`:
 
 ```js
-
 var recipeApp = angular.module('recipeApp', []);
+```
+Define the `RecipeListController` controller on the `recipeApp` module:
 
-// Define the `RecipeListController` controller on the `recipeApp` module
+```js
 recipeApp.controller('RecipeListController', function RecipeListController($scope) {
+```
+
+Get the data from `recipes.not.json` in the data directory:
+
+```js
     $scope.recipes = [
         {
             name: 'recipe1309',
