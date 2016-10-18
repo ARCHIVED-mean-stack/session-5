@@ -271,7 +271,7 @@ Add `<script src="https://code.angularjs.org/1.5.8/angular.js"></script>`.
 
 ###Controllers
 
-Git branch controllers
+on `git branch module`
 
 ```html
 <article ng-app="recipeApp" ng-controller="RecipeListController">
@@ -284,7 +284,7 @@ Git branch controllers
 </article>
 ```
 
-Define the `recipeApp` module in a new `recipes` folder as `recipe-list.module.js`:
+Define the `recipeApp` module in a new `recipes` folder as `recipe-list.module.js` and link to it from index.html:
 
 ```js
 var recipeApp = angular.module('recipeApp', []);
@@ -293,6 +293,8 @@ Define the `RecipeListController` controller on the `recipeApp` module:
 
 ```js
 recipeApp.controller('RecipeListController', function RecipeListController($scope) {
+
+});
 ```
 
 Get the data from `recipes.not.json` in the data directory:
@@ -331,14 +333,13 @@ Get the data from `recipes.not.json` in the data directory:
             image: 'hamburger.png'
         }
     ]
-});
 ```
 
-###Components
+###Componentize
 
-Components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs.
+Remember - components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs.
 
-Git stash, git branch, git checkout (remove the refrences to the files above in index.html)
+Git stash, git branch, git checkout (remove the references to the files above in index.html)
 
 Create `app-module.js` in the app directory and link to it in `index.html`:
 
@@ -350,9 +351,9 @@ angular.module('recipeApp', []);
 
 [Article on use strict](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/)
 
-This defines the `recipeApp` [module](https://docs.angularjs.org/guide/module) which depends on the `recipeList` module.
+This defines the `recipeApp` [module](https://docs.angularjs.org/guide/module).
 
-Create `recipe-list.component.js` and save it to the recipes directory and link it to index.html:
+Create `recipe-list.component.js` in the recipes directory and link it to index.html (remove the previously use recipe-list.module.js):
 ```
 'use strict';
 
@@ -369,7 +370,7 @@ And add the component to the page:
 </div>
 ```
 
-Add the controller to the component:
+Add the controller to `recipe-list.component.js`:
 ```js
 angular.module('recipeApp').component('recipeList', {
     template:
@@ -436,9 +437,8 @@ template:
 ```
 Make it an external file:
 ```js
-templateUrl: 'js/recipe-template.html',
+templateUrl: 'recipes/recipe-template.html',
 ```
-
 Note - this link it relative to index.html
 
 ###Styling the Recipes
@@ -447,34 +447,30 @@ Note - this link it relative to index.html
 * add it to the imports in `styles.scss
 * add a class to the ul `<ul class="recipes-list">`
 ```css
-.p-recipes article {
+.p-home article {
     margin-left: 1rem;
 }
 .recipes-list {
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
-    // flex-direction: row;
-    margin-left: -10px;
-    margin-top: -10px;
-
     li {
-        flex: 1 0 100%;
         box-sizing: border-box;
-        background: #e0ddd5;
-        color: #171e42;
-        padding: 10px;
-        margin-left: 10px;
-        margin-top: 10px;
-        @media (min-width: $break-one) {
-        flex: 1 0 calc(50% - 10px);
+        background: rgba(240,223,180,0.25);
+        padding: 0.875rem;
+        flex: 1 0 100%;
+        margin-top: 0.875rem;
+        margin-right: 0.875rem;
+        @media (min-width: $break-one){
+            flex: 1 0 calc(50% - 0.875rem);
         }
     }
     img {
         width: 30%;
         float: left;
-        margin-right: 1.5rem;
-        margin-left: 1rem;
+        margin-right: 0.875rem;
+        @media (min-width: $break-one){
+            width: 50%;
+        }
     }
 }
 ```
@@ -486,7 +482,8 @@ Note - this link it relative to index.html
 <script src="recipes/recipe-list.module.js"></script>
 <script src="recipes/recipe-list.component.js"></script>
 ```
-* app-module
+
+* app-module - adding recipeList as a requirement
 ```
 'use strict';
 
@@ -494,13 +491,15 @@ angular.module('recipeApp', [
     'recipeList'
 ]);
 ```
-* recipe-list.module
+
+* recipe-list.module - a new file that declares a module
 ```
 'use strict';
 
 angular.module('recipeList', []);
 ```
-* recipe-list.component
+
+* recipe-list.component - unchanged
 ```
 'use strict';
         
@@ -527,9 +526,9 @@ angular.module('recipeApp').component('recipeList', {
 </p>
 ```
 
-`<li ng-repeat="recipe in $ctrl.recipes | filter:$ctrl.query | orderBy:$ctrl.orderProp"">`
+`<li ng-repeat="recipe in $ctrl.recipes | filter:$ctrl.query | orderBy:$ctrl.orderProp">`
 
-Add to bottom of recipe-list.component.js
+Add to the controller in `recipe-list.component.js` after the recipes array:
 
 `this.orderProp = 'date';`
 
@@ -545,7 +544,7 @@ angular.module('recipeApp').component('recipeList', {
         var self = this;
         self.orderProp = 'date';
 
-        $http.get('recipes/recipes.json').then(function (response) {
+        $http.get('data/recipes.json').then(function (response) {
             self.recipes = response.data;
         });
     }
@@ -556,13 +555,23 @@ angular.module('recipeApp').component('recipeList', {
 
   `<h1><a href="#recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>`
 
-  Add ngRoute
+  Add ngRoute to indes.html after the main angular load:
 
   `<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>`
 
   Add config (after app.module)
 
   `<script src="app.config.js"></script>`
+
+  We need to add `ngRoute` as a dependency for our module:
+  ```
+    'use strict';
+
+    angular.module('recipeApp', [
+    'recipeList',
+    'ngRoute'
+]);
+```
 
 
 
