@@ -562,7 +562,7 @@ angular.module('recipeApp').component('recipeList', {
 
 ##Homework
 
-1. Add an Angular component to the previous week's homework.
+1. Add a home page with an Angular module to the previous week's homework.
 
 1. Attempt the Angular [PhoneCat](https://docs.angularjs.org/tutorial/) tutorial up to part 8. Note - you may need to install [Bower](https://bower.io) in order for it to work. I had to, and also has to use `sudo bower install --allow-root` in order to permit it to install dependencies.
 
