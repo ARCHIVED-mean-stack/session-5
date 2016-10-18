@@ -636,14 +636,14 @@ Link to recipe-detail files:
 
 ##Homework
 
+1. Start with this repo and run through the steps again for the sushi page making sure you understand what has been done (basically - redo the exercise).
+
 1. Add a home page with an Angular module to the previous week's homework.
 
 
 ##Reading
 
 Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS and Node.js, chapter 4. Please attempt to implement his sample app on your computer. Here's his [Github repo with sample code](https://github.com/dickeyxxx/mean-sample). Be sure to look at the branches (they correspond to chapter numbers) and don't forget to run `sudo npm install` when running the sample code.
-
-Attempt the Angular [PhoneCat](https://docs.angularjs.org/tutorial/) tutorial up to part 9. Note - you may need to install [Bower](https://bower.io) in order for it to work. I had to, and also has to use `sudo bower install --allow-root` in order to permit it to install dependencies.
 
 
 
