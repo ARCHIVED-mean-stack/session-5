@@ -616,14 +616,15 @@ Link to recipe-detail files:
     <script src="recipe-detail/recipe-detail.component.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-
-
+```
 
 
 
 ##Homework
 
-[Here](https://github.com/DannyBoyNYC/sushi) is where we got to by the end of class.
+[Here](https://github.com/DannyBoyNYC/sushi) is where we got to with sushi by the end of class.
+
+[Here](http://daniel.deverell.com/mean-fall-2016/session-5-done.zip) is the complete repo including the `scripting` directory with the component.
 
 1. Start with this repo and run through the steps again for the sushi page making sure you understand what has been done (basically - redo the exercise).
 
