@@ -263,32 +263,16 @@ Note the addition of a new home page - `index.html` and the addition of images t
 * Edit the user preferences to `"editor.formatOnType": true,` and `"editor.formatOnSave": true`
 * Note the built-in support for Angular and Git
 
-Create a Git and Github repo for this project so we can use the built-in support in Code.
+Create a Git and Github repo for this project so we can use the built-in support in Code. Run `$ git init` and `$ git add .` in the sushi directory to allow Code to track changes in the folder.
 
 Run `sudo npm install`, run `gulp` and test by adding a selected state for the new home page to the sass (the class name for the page is `p-home`).
 
 Add `<script src="https://code.angularjs.org/1.5.8/angular.js"></script>`. 
 
-###Controllers
 
-on `git branch module`
+###Componentization
 
-```html
-<article ng-app="recipeApp" ng-controller="RecipeListController">
-    <ul>
-        <li ng-repeat="recipe in recipes">
-            <span>{{recipe.title}}</span>
-            <p>{{recipe.description}}</p>
-        </li>
-    </ul>
-</article>
-```
-
-###Componentize
-
-Remember - components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs.
-
-Git stash, git branch, git checkout (remove the references to the files above in index.html)
+Remember - components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs. For this reason we refer to $scope as $ctrl when passing information between the html (view) and the controller (model).
 
 Create `app-module.js` in the app directory and link to it in `index.html`:
 
@@ -384,11 +368,14 @@ template:
 </ul>
 `,
 ```
+
 Make it an external file:
+
 ```js
 templateUrl: 'recipes/recipe-template.html',
 ```
-Note - this link it relative to index.html
+
+(Note - the link is relative to index.html)
 
 ###Styling the Recipes
 
