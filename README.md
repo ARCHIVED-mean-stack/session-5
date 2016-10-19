@@ -623,6 +623,8 @@ Link to recipe-detail files:
 
 ##Homework
 
+[Here](https://github.com/DannyBoyNYC/sushi) is where we got to by the end of class.
+
 1. Start with this repo and run through the steps again for the sushi page making sure you understand what has been done (basically - redo the exercise).
 
 1. Add a home page with an Angular module to the previous week's homework.
