@@ -622,7 +622,7 @@ Link to recipe-detail files:
 
 ##Homework
 
-[Here](https://github.com/DannyBoyNYC/sushi) is where we got to with sushi by the end of class.
+[Here](https://github.com/DannyBoyNYC/sushi) is where we got to with the sushi recipe app by the end of class.
 
 [Here](http://daniel.deverell.com/mean-fall-2016/session-5-done.zip) is the complete repo including the `scripting` directory with the component.
 
