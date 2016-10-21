@@ -274,7 +274,7 @@ Add `<script src="https://code.angularjs.org/1.5.8/angular.js"></script>`.
 
 Remember - components take the template (html) and controller and unify them into a single item. They offer re-usability and allow the scope to be isolated thus avoiding potentially difficult bugs. For this reason we refer to $scope as $ctrl when passing information between the html (view) and the controller (model).
 
-Create `app-module.js` in the app directory and link to it in `index.html`:
+Create `app.module.js` in the app directory and link to it in `index.html`:
 
 ```
 'use strict';
@@ -418,12 +418,12 @@ a {
 ###Breakout
 
 ```html
-<script src="app-module.js"></script>
+<script src="app.module.js"></script>
 <script src="recipes/recipe-list.module.js"></script>
 <script src="recipes/recipe-list.component.js"></script>
 ```
 
-* app-module - adding recipeList as a requirement
+* app.module - adding recipeList as a requirement
 ```
 'use strict';
 
@@ -472,152 +472,6 @@ Add to the controller in `recipe-list.component.js` after the recipes array:
 
 `this.orderProp = 'date';`
 
-###Fetching the Data
-
-Use recipes.json in `recipe-list.component.js`. Since we are making the assignment of the recipes property in a callback function, where the this value is not defined, we also introduce a local variable called self that points back to the controller instance.
-
-```
-angular.module('recipeApp').component('recipeList', {
-    templateUrl: 'recipes/recipe-template.html',
-
-    controller: function RecipeListController($http) {
-        var self = this;
-        self.orderProp = 'date';
-
-        $http.get('data/recipes.json').then(function (response) {
-            self.recipes = response.data;
-        });
-    }
-  });
-  ```
-
-  ###Preparing for Routing
-
-  In the html template:
-
-  `<h1><a href="#recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>`
-
-  Add ngRoute to index.html after the main angular load:
-
-  `<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>`
-
-  Add link to `app.config.js` (after app.module):
-
-  `<script src="app.config.js"></script>`
-
-  We need to add `ngRoute` as a dependency for our app-module.js:
-  ```
-    'use strict';
-
-    angular.module('recipeApp', [
-    'ngRoute',
-    'recipeList'
-]);
-```
-
-Create the app.config file in the app folder:
-```js
-angular.
-    module('recipeApp').
-    config(['$locationProvider', '$routeProvider',
-        function config($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('!');
-            $routeProvider.
-                when('/', {
-                    template: '<recipe-list></recipe-list>'
-                }).
-                otherwise('/recipes');
-        }
-    ]);
-```
-
-Edit index.html:
-```html
-<article ng-app="recipeApp">
-    <div ng-view></div>
-</article>
-```
-
-###Routing
-
-Add ngRoute as a dependency to our application:
-```
-'use strict';
-
-angular.module('recipeApp', [
-    'ngRoute',
-    'recipeDetail',
-    'recipeList'
-]);
-```
-
-
-```
-angular.
-    module('recipeApp').
-    config(['$locationProvider', '$routeProvider',
-        function config($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('!');
-            $routeProvider.
-                when('/', {
-                    template: '<recipe-list></recipe-list>'
-                }).
-                when('/recipes/:recipeId', {
-                    template: '<recipe-detail></recipe-detail>'
-                }).
-                otherwise('/recipes');
-        }
-    ]);
-```
-
-Alter the recipe-template to include the bang:
-```
-<h1><a href="#!recipes/{{ recipe.name }} ">{{ recipe.title }}</a></h1>
-```
-
-```
-Create stubs for recipe details in a new recipe-detail directory:
-
-recipe-detail.module.js
-```
-angular.module('recipeDetail', [
-    'ngRoute'
-]);
-```
-
-recipe-detail.component.js
-```
-angular.
-    module('recipeDetail').
-    component('recipeDetail', {
-        template: '<p>Detail view for <span>{{$ctrl.recipeId}}</span></p>',
-        controller: ['$routeParams',
-            function RecipeDetailController($routeParams) {
-                this.recipeId = $routeParams.recipeId;
-            }
-        ]
-    });
-```
-
-Link to recipe-detail files:
-
-```
-<head>
-    <meta charset="UTF-8">
-    <title>Brooklyn Eats: Matsu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.angularjs.org/1.5.8/angular.js"></script>
-    <script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
-    <script src="app-module.js"></script>
-    <script src="app.config.js"></script>
-    <script src="recipes/recipe-list.module.js"></script>
-    <script src="recipes/recipe-list.component.js"></script>
-    <script src="recipe-detail/recipe-detail.module.js"></script>
-    <script src="recipe-detail/recipe-detail.component.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-</head>
-```
-
 
 
 ##Homework
@@ -626,7 +480,7 @@ Link to recipe-detail files:
 
 [Here](http://daniel.deverell.com/mean-fall-2016/session-5-done.zip) is the complete repo including the `scripting` directory with the component.
 
-1. Start with this repo and run through the steps again for the sushi page making sure you understand what has been done (basically - redo the exercise).
+1. Start with this repo and run through the steps again using the sushi page making sure you understand how to create a component (e.g. redo the exercise that was done in class).
 
 1. Add a home page with an Angular module to the previous week's homework.
 
